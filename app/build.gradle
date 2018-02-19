@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.henshin.stop_car"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'   // aar目录
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation 'com.android.support:cardview-v7:26.0.0'
+    implementation 'com.android.support:recyclerview-v7:26.0.0'
+    implementation 'com.android.support:design:26.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    //连接服务器端的okhttp3库
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    //用于登录注册的开源库
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    compile(name: 'arcgis-android-100.2.0', ext: 'aar')
+    compile files('libs/tianditu2.0.jar')
+    //侧滑栏
+    compile('com.mikepenz:materialdrawer:6.0.2@aar') {
+        transitive = true
+    }
+    implementation 'com.mikepenz:itemanimators:1.0.1@aar'
+    implementation 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
+    implementation 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'
+    //圆形头像库
+    implementation 'de.hdodenhof:circleimageview:1.3.0'
+}

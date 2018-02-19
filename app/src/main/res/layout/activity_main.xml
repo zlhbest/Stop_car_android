@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <RelativeLayout
+        android:id="@+id/drawer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.esri.arcgisruntime.mapping.view.MapView
+                android:id="@+id/mMapview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:id="@+id/wait"
+                        android:layout_width="80px"
+                        android:layout_height="80px"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"/>
+
+                    <com.henshin.stop_car.SpringActionMeau.ActionMenu
+                        android:id="@+id/mainactionMenuBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginBottom="30dp"
+                        app:actionMenuIcon="@drawable/add2"
+                        app:actionMenuOnIcon="@drawable/close"
+                        app:animationDuration="3000"
+                        app:buttonNormalColor="#ff5bc0de"
+                        app:buttonPressColor="#ff39b3d7"
+                        app:circleRadius="25dp"
+                        app:dimens="10dp"
+                        app:expandDirect="expandDirectTop">
+
+                    </com.henshin.stop_car.SpringActionMeau.ActionMenu>
+
+                </RelativeLayout>
+            </com.esri.arcgisruntime.mapping.view.MapView>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
