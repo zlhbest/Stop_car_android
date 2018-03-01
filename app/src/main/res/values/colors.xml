@@ -20,4 +20,12 @@
     <color name="tran0">#00000000</color>
 
     <color name="tran">#0F001111</color>
+
+    <!-- action menu color -->
+    <color name="menuNormalRed">#ffff0000</color>
+    <color name="menuPressRed">#ffd2322d</color>
+    <color name="menuNormalInfo">#ff90FB98</color>
+    <color name="menuPressInfo">#ff98ff90</color>
+    <color name="swiperefresh_color1">#ff00ddff</color>
+
 </resources>

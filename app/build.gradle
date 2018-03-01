@@ -52,4 +52,7 @@ dependencies {
     implementation 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'
     //圆形头像库
     implementation 'de.hdodenhof:circleimageview:1.3.0'
+    //图像加载包
+    compile files('libs/universal-image-loader-1.9.5.jar')
+
 }

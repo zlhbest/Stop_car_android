@@ -53,7 +53,6 @@ public class SignupActivity extends AppCompatActivity {
     String mobile ;
     String password ;
     String passwordone;
-    private  String url;
     private String date;
     ProgressDialog progressDialog;
     private Handler handler = new Handler()
@@ -192,7 +191,6 @@ public class SignupActivity extends AppCompatActivity {
     private void connection()
     {
         try {
-            url = "http://192.168.1.5:8080/Stop_Car/a1002.html";
             password = BaseTools.getMd5Code(password);
             date = "name/" + name + "#email/" + email+"#mobile/"+mobile+"#password/"+password;
             final HashMap<String, Object> map = ArrayTools.splitArray(date);
@@ -204,7 +202,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
             RequestBody requestBody = builder.build();
-            final Request request = new Request.Builder().url(url).post(requestBody).build();
+            final Request request = new Request.Builder().url(getString(R.string.urla1002)).post(requestBody).build();
             Call call = okHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override

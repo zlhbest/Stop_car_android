@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private  ProgressDialog progressDialog=null;
     private  String password;
     private  String username;
-    private  String url;
     private String date;
     @BindView(R.id.input_username)
     EditText _userText;
@@ -141,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
     private void connection()
     {
         try {
-            url = "http://192.168.1.5:8080/Stop_Car/a1001.html";
             password = BaseTools.getMd5Code(password);
             date = "username/" + username + "#password/" + password;
             final HashMap<String, Object> map = ArrayTools.splitArray(date);
@@ -153,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             RequestBody requestBody = builder.build();
-            final Request request = new Request.Builder().url(url).post(requestBody).build();
+            final Request request = new Request.Builder().url(getString(R.string.urla1001)).post(requestBody).build();
             Call call = okHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override

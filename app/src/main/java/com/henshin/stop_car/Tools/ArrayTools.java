@@ -1,6 +1,8 @@
 package com.henshin.stop_car.Tools;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by henshin on 2018/2/10.
@@ -18,5 +20,15 @@ public class ArrayTools {
             nameValue.put(nameValues[i].split("\\/")[0],nameValues[i].split("\\/")[1]);
         }
         return nameValue;
+    }
+    //String数组转成List
+    public final static List<String> StringToList(String[] string)
+    {
+        List<String> list = new ArrayList<>();
+        for(int i=0;i<string.length;i++)
+        {
+            list.add(string[i]);
+        }
+        return list;
     }
 }

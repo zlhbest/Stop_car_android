@@ -1,13 +1,17 @@
 package com.henshin.stop_car.user;
 
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -57,66 +61,46 @@ public class Userpage extends AppCompatActivity {
 
 
         listView = (RecyclerView)view1. findViewById(R.id.list);
-        List<String> list = new ArrayList<String>();
-        for(int i = 0 ; i < 50 ; ++i){
-            list.add(" String "+i);
-        }
-        listView.setAdapter(new StringAdapter(list));
+        listView.setAdapter(new UserAdapter(Userpage.this,this));
         layoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(layoutManager);
-
-
-
-
+        //listView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));//设置横线
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 float alpha = ((float) msg.what) / 100f;
                 overRe.setAlpha(alpha);
-
                 if (msg.what == 0) {
                     backRe.setVisibility(View.INVISIBLE);
                     toolsRe.setVisibility(View.VISIBLE);
                 } else {
                     backRe.setVisibility(View.VISIBLE);
                     toolsRe.setVisibility(View.INVISIBLE);
-
                 }
-
-
             }
         };
-
-
         pagerAdapter = new PagerAdapter() {
-
             @Override
             public boolean isViewFromObject(View arg0, Object arg1) {
 
                 return arg0 == arg1;
             }
-
             @Override
             public int getCount() {
 
                 return viewList.size();
             }
-
             @Override
             public void destroyItem(ViewGroup container, int position,
                                     Object object) {
                 container.removeView(viewList.get(position));
-
             }
-
             @Override
             public int getItemPosition(Object object) {
 
                 return super.getItemPosition(object);
             }
-
-
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 container.addView(viewList.get(position));
@@ -133,75 +117,15 @@ public class Userpage extends AppCompatActivity {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
-        collapsingToolbar.setBackgroundResource(R.drawable.cheese_2);
-
+        //添加背景
+        collapsingToolbar.setBackgroundResource(R.drawable.header);
     }
-
-
     public void dodo(View v) {
-
-
         viewPager.setCurrentItem(0);
-
-
     }
-
     public void dodo1(View v) {
-
-
         viewPager.setCurrentItem(1);
-
-    }
-
-    class StringAdapter extends RecyclerView.Adapter<ViewHolder>{
-
-
-        private List<String> list ;
-        private LayoutInflater inflater;
-        StringAdapter( List<String> list ){
-            this.list = list ;
-            inflater = LayoutInflater.from(Userpage.this);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
-            super.onBindViewHolder(holder, position, payloads);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position);
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = inflater.inflate(R.layout.item,null,false);
-
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.tv.setText(list.get(position));
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv ;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            tv = (TextView)itemView.findViewById(R.id.tv);
-        }
     }
 }
