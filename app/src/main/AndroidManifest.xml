@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.henshin.stop_car">
+    <!--开启相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- GPS定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--读取SDK权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -24,7 +30,17 @@
         <activity android:name=".login.LoginActivity" android:theme="@style/AppTheme"/>
         <activity android:name=".MainActivity" android:theme="@style/ToolbarPopupTheme" />
         <activity android:name=".login.SignupActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".user.Userpage" android:theme="@style/AppTheme"/>
+        <activity android:name=".user.Userpage" android:theme="@style/ToolbarPopupTheme"/>
+        <provider
+            android:authorities="com.hensin.provider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path">
+            </meta-data>
+        </provider>
     </application>
 
 </manifest>

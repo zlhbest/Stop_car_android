@@ -26,6 +26,7 @@ import com.henshin.stop_car.MainActivity;
 import com.henshin.stop_car.R;
 import com.henshin.stop_car.Tools.ArrayTools;
 import com.henshin.stop_car.Tools.BaseTools;
+import com.henshin.stop_car.Tools.CropPic.PicTools;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -50,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     Button _loginButton;
     @BindView(R.id.link_signup)
     TextView _signupLink;
+    private String PicUri;
+    private String Uesrid;
     //用于自动登录的实现
     private SharedPreferences sp;
     private Handler handler = new Handler()
@@ -57,7 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg)
         {
             String obj = (String)msg.obj;
-            if(obj.equals("1\r\n"))
+            PicUri = ArrayTools.StringToArray(obj)[2];
+            Uesrid = ArrayTools.StringToArray(obj)[1];
+            if(ArrayTools.StringToArray(obj)[0].equals("1"))
             {
                 new android.os.Handler().postDelayed(
                         new Runnable() {
@@ -68,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }, 1000);
             }
-            else if(obj.equals("0\r\n"))
+            else if(ArrayTools.StringToArray(obj)[0].equals("0"))
             {
                 progressDialog.dismiss();
                 Toast.makeText(getBaseContext(), "用户名或密码错误", Toast.LENGTH_LONG).show();
@@ -232,6 +237,8 @@ public class LoginActivity extends AppCompatActivity {
         //保存用户名
         editor.putString("username", username);
         editor.putString("password",password);
+        editor.putString("PicUri",PicUri.replace("\r\n",""));
+        editor.putString("Uesrid",Uesrid);
         editor.apply();
 
     }

@@ -21,6 +21,11 @@ public class ArrayTools {
         }
         return nameValue;
     }
+    public final static String[] StringToArray(String string)
+    {
+        return  string.split("\\#");
+    }
+
     //String数组转成List
     public final static List<String> StringToList(String[] string)
     {

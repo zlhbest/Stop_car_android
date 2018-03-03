@@ -27,12 +27,14 @@ package com.henshin.stop_car;
 //
 //
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -63,6 +65,7 @@ import com.esri.arcgisruntime.mapping.view.MapView;
 import com.henshin.stop_car.TDmap.TianDiTuMethodsClass;
 import com.henshin.stop_car.Tools.NetworkTools;
 import com.henshin.stop_car.Tools.initimage;
+import com.henshin.stop_car.Tools.myDialog;
 import com.henshin.stop_car.login.LoginActivity;
 import com.henshin.stop_car.user.Userpage;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -102,15 +105,19 @@ public class MainActivity extends AppCompatActivity {
     //按钮
     private  FloatingActionButton location ;
     private boolean locationorno=false;
+    private com.henshin.stop_car.Tools.myDialog myDialog;
+    private SharedPreferences sp;
+    private String PicUrl;
+    private String  username;
+    private Bitmap bitmap;
     //Handle
     private Handler handler = new Handler();
     private Runnable runnable=new Runnable(){
         @Override
         public void run() {
-            NetworkTools.noteIntentConnect(getBaseContext());
+
             if(!NetworkTools.isGpsEnabled(getBaseContext()))
             {
-                Toast.makeText(getBaseContext(),"请打开GPS",Toast.LENGTH_SHORT).show();
                 location.setImageResource(R.drawable.location_no);
                 locationorno=false;
             }
@@ -162,7 +169,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void init()
     {
+        NetworkTools.noteIntentConnect(getBaseContext());
         location = (FloatingActionButton)findViewById(R.id.fab);
+        sp=getSharedPreferences("setting", 0);
+        username =sp.getString("username",null);
+        PicUrl  =sp.getString("PicUri",null);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,12 +184,12 @@ public class MainActivity extends AppCompatActivity {
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                Toast.makeText(getBaseContext(),"打开",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(),"打开",Toast.LENGTH_SHORT).show();
                 return true;
             }
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                Toast.makeText(getBaseContext(),"关闭",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getBaseContext(),"关闭",Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -209,7 +220,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void cehualan(Bundle savedInstanceState,Toolbar toolbar)
     {
-        final IProfile profile = new ProfileDrawerItem().withName("henshin").withEmail("一切皆有可能").withIcon(R.drawable.profile).withIdentifier(100);
+        if(PicUrl!=null) {
+            bitmap = BitmapFactory.decodeFile(Uri.parse(PicUrl).getPath());
+        }
+        else{
+            bitmap = BitmapFactory.decodeFile(Uri.parse("file:////sdcard/image_output.jpg").getPath());
+        }
+        final IProfile profile = new ProfileDrawerItem().withName(username).withEmail("一切皆有可能").withIcon(bitmap).withIdentifier(100);
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
@@ -270,38 +287,30 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showNormalDialog()
     {
-        /* @setIcon 设置对话框图标
-         * @setTitle 设置对话框标题
-         * @setMessage 设置对话框消息提示
-         * setXXX方法返回Dialog对象，因此可以链式设置属性
-         */
-        final AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(MainActivity.this);
-        normalDialog.setIcon(R.drawable.exit);
-        normalDialog.setTitle("退出APP");
-        normalDialog.setMessage("确认退出");
-        normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences spout =getSharedPreferences("setting", 0);
-                        SharedPreferences.Editor ed =spout.edit();
-                        ed.clear();
-                        ed.apply();
-                       Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-                       startActivity(intent);
-                        finish();
-                    }
-                });
-        normalDialog.setNegativeButton("关闭",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        // 显示
-        normalDialog.show();
+        myDialog = new myDialog(MainActivity.this);
+        myDialog.setTitle("提示");
+        myDialog.setMessage("确定退出应用?");
+        myDialog.setYesOnclickListener("确定", new myDialog.onYesOnclickListener() {
+            @Override
+            public void onYesClick() {
+                SharedPreferences spout =getSharedPreferences("setting", 0);
+                SharedPreferences.Editor ed =spout.edit();
+                ed.clear();
+                ed.apply();
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+                myDialog.dismiss();
+            }
+        });
+        myDialog.setNoOnclickListener("取消", new myDialog.onNoOnclickListener() {
+            @Override
+            public void onNoClick() {
+                Toast.makeText(MainActivity.this,"点击了--取消--按钮",Toast.LENGTH_LONG).show();
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
     }
     private void LocationDisplay(MapView mapView)
     {

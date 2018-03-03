@@ -152,8 +152,8 @@
             <!--头像设置 CircleImageView这是圆形头像-->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/touxiang"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="100dp"
@@ -161,6 +161,7 @@
                 />
 
             <TextView
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/touxiang"
@@ -168,7 +169,7 @@
                 android:layout_marginTop="20dp"
                 android:text="加油加油加油"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"/>
+                android:textSize="25dp"/>
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 

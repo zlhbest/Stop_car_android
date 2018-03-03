@@ -60,7 +60,7 @@ public class SignupActivity extends AppCompatActivity {
         public void handleMessage(Message msg)
         {
             String result = (String)msg.obj;
-            if(result.equals("1\r\n"))
+            if(ArrayTools.StringToArray(result)[0].equals("1"))
             {
                 new android.os.Handler().postDelayed(
                         new Runnable() {
