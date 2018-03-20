@@ -20,7 +20,7 @@
     <color name="tran0">#00000000</color>
 
     <color name="tran">#0F001111</color>
-
+<color name="FButton">#FF6347</color>
     <!-- action menu color -->
     <color name="menuNormalRed">#ffff0000</color>
     <color name="menuPressRed">#ffd2322d</color>

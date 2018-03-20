@@ -40,7 +40,7 @@ public class PicTools {
     private Context context;
     private Activity activity;
 
-    public  void PhoneRoot()
+    public static void PhoneRoot(Context context,Activity activity)
     {
          /*
          * 先判断用户以前有没有对我们的应用程序允许过读写内存卡内容的权限，

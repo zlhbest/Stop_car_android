@@ -24,7 +24,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder>
     private List<String> list ;
     private Context context;
     private LayoutInflater inflater;
-    UserAdapter( AppCompatActivity Userpage,Context context){
+    UserAdapter(AppCompatActivity Userpage,Context context){
         this.context = context;
         this.list = ArrayTools.StringToList(context.getResources().getStringArray(R.array.sports)); ;
         inflater = LayoutInflater.from(Userpage);
@@ -50,7 +50,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder>
     public void onBindViewHolder(UserViewHolder holder, int position) {
         holder.getTextView().setText(list.get(position));
         holder.getRelativeLayout().setTag(list.get(position));
-        ImageLoader.getInstance().displayImage(context.getString(R.string.yue),((UserViewHolder)holder).getImageView());
+        //ImageLoader.getInstance().displayImage(context.getString(R.string.yue),((UserViewHolder)holder).getImageView());
+        
     }
     @Override
     public int getItemCount() {

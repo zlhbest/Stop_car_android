@@ -1,5 +1,7 @@
 package com.henshin.stop_car.Tools;
 
+import com.henshin.stop_car.seatch.stopcar;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,5 +37,34 @@ public class ArrayTools {
             list.add(string[i]);
         }
         return list;
+    }
+    public  static List<String> ArraytoList(ArrayList<stopcar> sc)
+    {
+        List<String> list = new ArrayList<>();
+        for(int i=0;i<sc.size();i++)
+        {
+            list.add(sc.get(i).getID());
+        }
+        return list;
+    }
+    public  static List<Double> ArraytoListscdis(ArrayList<stopcar> sc)
+    {
+        List<Double> list = new ArrayList<>();
+        for(int i=0;i<sc.size();i++)
+        {
+            list.add(sc.get(i).getDistance());
+        }
+        return list;
+    }
+    public static String[] ArrayListToAtring(ArrayList<stopcar> sc)
+    {
+        int i=0;
+        String[] strings = new String[sc.size()];
+        for(stopcar stopc:sc)
+        {
+            strings[i] = stopc.getID();
+            i++;
+        }
+        return strings;
     }
 }

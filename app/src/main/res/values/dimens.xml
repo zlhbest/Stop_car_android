@@ -9,4 +9,8 @@
         <dimen name="fab_margin">16dp</dimen>
         <dimen name="list_item_avatar_size">40dp</dimen>
 
+        <dimen name="design_fab_size_normal">75dp</dimen>
+        <dimen name="design_fab_size_mini">40dp</dimen>
+
+
 </resources>

@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/jumbo"
-        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     <RelativeLayout
@@ -38,18 +37,49 @@
 
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/fab"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_marginBottom="26dp"
-                        android:layout_marginEnd="18dp"
-                        android:layout_marginRight="18dp"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginRight="11dp"
+                        android:layout_toLeftOf="@+id/wait"
+                        android:layout_toStartOf="@+id/wait"
                         android:src="@drawable/location_no"
-                        android:background="@color/jumbo"/>
+                        app:elevation="2dp"
+                        app:fabSize="mini" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/saoma"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/fab"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/saoma"
+                        app:elevation="2dp"
+                        app:backgroundTint="#FF6347"
+                        app:fabSize="normal" />
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/nearSC"
+                        app:fabSize="mini"
+                        app:elevation="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/fab"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
+                        android:src="@drawable/searchcar" />
                 </RelativeLayout>
+
+
             </com.esri.arcgisruntime.mapping.view.MapView>
         </RelativeLayout>
     </RelativeLayout>
+    <br.com.mauker.materialsearchview.MaterialSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MaterialSearchViewStyle"/>
 </RelativeLayout>

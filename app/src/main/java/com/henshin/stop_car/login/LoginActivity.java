@@ -3,9 +3,13 @@ package com.henshin.stop_car.login;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +30,6 @@ import com.henshin.stop_car.MainActivity;
 import com.henshin.stop_car.R;
 import com.henshin.stop_car.Tools.ArrayTools;
 import com.henshin.stop_car.Tools.BaseTools;
-import com.henshin.stop_car.Tools.CropPic.PicTools;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -53,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView _signupLink;
     private String PicUri;
     private String Uesrid;
+    private Bitmap bitmap;
     //用于自动登录的实现
     private SharedPreferences sp;
     private Handler handler = new Handler()
@@ -237,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
         //保存用户名
         editor.putString("username", username);
         editor.putString("password",password);
-        editor.putString("PicUri",PicUri.replace("\r\n",""));
+        String returntoPic = getResources().getString(R.string.url)+PicUri.replace("\r\n","");
         editor.putString("Uesrid",Uesrid);
         editor.apply();
 

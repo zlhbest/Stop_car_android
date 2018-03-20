@@ -9,14 +9,14 @@
     the big cheese.</string>
     <string name="urla1001">http://39.106.181.120:8080/Stop_Car/a1001.html</string><!--登录-->
     <string name="urla1002">http://39.106.181.120:8080/Stop_Car/a1002.html</string><!--注册-->
-    <string name="urla1004">http://192.168.0.112:8080/Stop_Car/A1004Servlet</string><!--头像上传存储-->
-    <string name="url">http://192.168.0.112:8080/</string>
+    <string name="urla1004">http://39.106.181.120:8080/Stop_Car/A1004Servlet</string><!--头像上传存储-->
+    <string name="url">http://39.106.181.120:8080/</string>
     <!--图片Url-->
     <string name="yue">http://39.106.181.120:8080/img/yue.png</string>
     <string-array name="sports">
         <item>您的余额</item>
     </string-array>
     <!--属性图层-->
-    <string name="parkpoint">http://39.106.181.120:6080/arcgis/rest/services/AllPark/MapServer</string>
-    <string name="park">http://39.106.181.120:6080/arcgis/rest/services/Park/Mapserver</string>
+    <string name="parkpointMapserver">http://192.168.1.101:6080/arcgis/rest/services/testpoint/MapServer</string>
+    <string name="parkpointFeatureServer">http://192.168.1.101:6080/arcgis/rest/services/testpoint/FeatureServer/0</string>
 </resources>

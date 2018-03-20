@@ -1,15 +1,12 @@
 package com.henshin.stop_car.user;
 
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,29 +17,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
-import com.henshin.stop_car.MainActivity;
 import com.henshin.stop_car.R;
 import com.henshin.stop_car.Tools.CropPic.PicTools;
 import com.henshin.stop_car.Tools.myDialog;
-import com.henshin.stop_car.login.LoginActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
@@ -72,10 +63,11 @@ public class Userpage extends AppCompatActivity {
     private String username;
     private TextView usernameText;
     private Handler updatapic ;
-    private  ProgressDialog progressDialog=null;
+    private ProgressDialog progressDialog=null;
     private String pic;
     private SharedPreferences sp;
     private String Uesrid;
+    private Bitmap bitmap = BitmapFactory.decodeFile(Uri.parse("file:////sdcard/image_output.jpg").getPath());
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +78,8 @@ public class Userpage extends AppCompatActivity {
         listView.setAdapter(new UserAdapter(Userpage.this,this));
         layoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(layoutManager);
-        //listView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));//设置横线
-        mHandler = new Handler() {
+        mHandler = new Handler()
+        {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -111,10 +103,9 @@ public class Userpage extends AppCompatActivity {
                 if(!result.equals("error")) {
                     pic=getResources().getString(R.string.url)+result;
                     Glide.with(getBaseContext())
-                            .load(getResources().getString(R.string.url)+result)
+                            .load(pic)
                             .into(touxiang);
                     progressDialog.dismiss();
-                    sp.getString("PicUrl",pic);
                     Toast.makeText(getBaseContext(),"上传头像成功",Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -199,16 +190,7 @@ public class Userpage extends AppCompatActivity {
         usernameText.setText(username);
         sp=getSharedPreferences("setting", 0);
         Uesrid=sp.getString("Uesrid",null);
-        pic = sp.getString("PicUri",null);
-        if(pic!=null)
-        {
-            Bitmap bitmap = BitmapFactory.decodeFile(Uri.parse(pic).getPath());
-            touxiang.setImageBitmap(bitmap);
-        }
-        else {
-            Bitmap bitmap = BitmapFactory.decodeFile(Uri.parse("file:////sdcard/image_output.jpg").getPath());
-            touxiang.setImageBitmap(bitmap);
-        }
+        touxiang.setImageBitmap(bitmap);
     }
     private void onclicktouxiang()
     {
@@ -233,7 +215,7 @@ public class Userpage extends AppCompatActivity {
         myDialog.setNoOnclickListener("相机", new myDialog.onNoOnclickListener() {
             @Override
             public void onNoClick() {
-                picTools.PhoneRoot();
+                picTools.PhoneRoot(getBaseContext(),Userpage.this);
                 picTools.startCamera();
             }
         });
@@ -243,9 +225,9 @@ public class Userpage extends AppCompatActivity {
     {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.addFormDataPart("Userid",Uesrid);
         builder.addFormDataPart("image", uri,
                 RequestBody.create(MediaType.parse("image/jpeg"), new File(uri)));
-        builder.addFormDataPart("Userid",Uesrid);
         RequestBody requestBody = builder.build();
         Request.Builder reqBuilder = new Request.Builder();
         Request request = reqBuilder
