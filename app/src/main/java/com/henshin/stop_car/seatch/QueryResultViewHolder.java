@@ -1,6 +1,7 @@
 package com.henshin.stop_car.seatch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.henshin.stop_car.R;
+import com.henshin.stop_car.samesctopcar.sameone;
 
 /**
  * Created by henshin on 2018/3/13.
@@ -44,7 +46,10 @@ public class QueryResultViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(context, ""+v.getTag(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, ""+v.getTag(), Toast.LENGTH_SHORT).show();
+               Intent intent= new Intent(context,sameone.class);
+               intent.putExtra("sanmeonename",v.getTag()+"");
+               context.startActivity(intent);
             }
         });
     }

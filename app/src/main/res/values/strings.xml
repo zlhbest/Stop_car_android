@@ -2,21 +2,30 @@
     <string name="app_name">找车位</string>
     <string name="action_settings">设置</string>
     <string name="location">定位</string>
-    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
-    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
-    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
-    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
-    the big cheese.</string>
+    <string name="cheese_ipsum">暂无数据</string>
+    <!--所有的接口-->
     <string name="urla1001">http://39.106.181.120:8080/Stop_Car/a1001.html</string><!--登录-->
     <string name="urla1002">http://39.106.181.120:8080/Stop_Car/a1002.html</string><!--注册-->
     <string name="urla1004">http://39.106.181.120:8080/Stop_Car/A1004Servlet</string><!--头像上传存储-->
+    <string name="urla1005">http://39.106.181.120:8080/Stop_Car/a1005.html</string><!--以用户id来查询用户的停车数据-->
+    <string name="urlc1001">http://39.106.181.120:8080/Stop_Car/c1001.html</string><!--实现状态查询-->
+    <string name="urlc1002">http://39.106.181.120:8080/Stop_Car/c1002.html</string><!--将停车位状态更变为1即变为以有车位-->
+    <string name="urlc1003">http://39.106.181.120:8080/Stop_Car/c1003.html</string><!--将状态更变为预定-->
+    <string name="urlc1004">http://39.106.181.120:8080/Stop_Car/c1004.html</string><!--将状态置0，状态为2时-->
+    <string name="urlc1005">http://39.106.181.120:8080/Stop_Car/c1005.html</string><!--将状态置0，状态为1时-->
+    <string name="urld1002">http://39.106.181.120:8080/Stop_Car/d1002.html</string><!--进行数据库模糊查询用-->
+    <string name="urlc1006">http://39.106.181.120:8080/Stop_Car/c1006.html</string><!--通过停车场id来查询停车场信息-->
+    <string name="urle1002">http://39.106.181.120:8080/Stop_Car/e1002.html</string><!--通过停车位显示停车位信息-->
     <string name="url">http://39.106.181.120:8080/</string>
-    <!--图片Url-->
-    <string name="yue">http://39.106.181.120:8080/img/yue.png</string>
-    <string-array name="sports">
-        <item>您的余额</item>
-    </string-array>
     <!--属性图层-->
-    <string name="parkpointMapserver">http://192.168.1.101:6080/arcgis/rest/services/testpoint/MapServer</string>
-    <string name="parkpointFeatureServer">http://192.168.1.101:6080/arcgis/rest/services/testpoint/FeatureServer/0</string>
+    <string name="parkpointFeatureServer">http://118.24.32.189:6080/arcgis/rest/services/Park/parkpoint/FeatureServer/0</string>
+    <string name="parkpointFeatureServermain">http://118.24.32.189:6080/arcgis/rest/services/Park/parkpoint/FeatureServer/1</string>
+    <string name="parkname">http://118.24.32.189:6080/arcgis/rest/services/Park/parkground/FeatureServer/0</string>
+    <string name="parkgroundname">http://118.24.32.189:6080/arcgis/rest/services/Park/parkground/FeatureServer/1</string>
+    <!--弹窗显示成功-->
+    <string name="success">预定成功</string>
+    <string name="text">请尽快确定是否占用此车位，在预定状态您可以退回或者付款选择此车位，退回和付款请见个人界面订单</string>
+    <string name="ok">ok</string>
+    <string name="error">预定失败</string>
+    <string name="text_error">请重新选定</string>
 </resources>

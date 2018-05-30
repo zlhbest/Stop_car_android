@@ -10,6 +10,7 @@ import com.esri.arcgisruntime.data.FeatureTable;
 import com.esri.arcgisruntime.data.Field;
 import com.esri.arcgisruntime.data.QueryParameters;
 import com.esri.arcgisruntime.data.QueryParameters.SpatialRelationship;
+import com.esri.arcgisruntime.data.ServiceFeatureTable;
 import com.esri.arcgisruntime.geometry.Geometry;
 import com.esri.arcgisruntime.geometry.GeometryType;
 import com.esri.arcgisruntime.layers.FeatureLayer;
@@ -442,6 +443,39 @@ public class MapQueryClass {
         Query(featureLayer, where, iQueryResult, null);
     }
 
+    public void Query(ServiceFeatureTable serviceFeatureTable,FeatureLayer featureLayer, String where, IQueryResult iQueryResult)
+    {
+        final FeatureLayer mainFeatureLayer = featureLayer;
+        this.mainMapQueryResult = new ArrayList();
+        this.mainQueryResultReturn = iQueryResult;
+        QueryParameters query = new QueryParameters();
+        String whereStr = where;
+        query.setWhereClause(whereStr);
+        final ListenableFuture<FeatureQueryResult> featureQueryResult =
+                serviceFeatureTable.queryFeaturesAsync (query, ServiceFeatureTable.QueryFeatureFields.LOAD_ALL);
+        featureQueryResult.addDoneListener(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
+                    FeatureQueryResult result = (FeatureQueryResult)featureQueryResult.get();
+                    Iterator<Feature> iterator = result.iterator();
+                    MapQueryClass.MapQueryResult mapQueryResult = new MapQueryClass.MapQueryResult();
+                    mapQueryResult.features = new ArrayList();
+                    while (iterator.hasNext())
+                    {
+                        Feature feature = (Feature)iterator.next();
+                        mapQueryResult.features.add(feature);
+                    }
+                    mapQueryResult.featureLayer = mainFeatureLayer;
+                    MapQueryClass.this.mainMapQueryResult.add(mapQueryResult);
+                    MapQueryClass.this.mainQueryResultReturn.getQuery();
+                }
+                catch (Exception localException) {}
+            }
+        });
+    }
     public void Query(FeatureLayer featureLayer, String where, IQueryResult iQueryResult, Geometry geometry)
     {
         final FeatureLayer mainFeatureLayer = featureLayer;
@@ -453,7 +487,8 @@ public class MapQueryClass {
         if (geometry != null) {
             query.setGeometry(geometry);
         }
-        final ListenableFuture<FeatureQueryResult> featureQueryResult = featureLayer.getFeatureTable().queryFeaturesAsync(query);
+        final ListenableFuture<FeatureQueryResult> featureQueryResult =
+                featureLayer.getFeatureTable().queryFeaturesAsync (query);
         featureQueryResult.addDoneListener(new Runnable()
         {
             public void run()
@@ -500,12 +535,6 @@ public class MapQueryClass {
                 case OID:
                     if (isNumber == true)
                     {
-                        //stringBuilder.append("");
-                        //stringBuilder.append(field.getName());
-                        //stringBuilder.append("=");
-                        //stringBuilder.append(search);
-                        //stringBuilder.append(" or");
-                        //stringBuilder.append(" upper(");
                         stringBuilder.append(field.getName());
                         stringBuilder.append("=");
                         stringBuilder.append(search);

@@ -13,6 +13,8 @@ public class user {
     private float aa006;// 用户余额
     private String aa007;//Email
     private String aa008;//电话
+    private String aa009;//个性签名
+    private String aa010;//头像路径
     public void setAa001(int Aa001)
     {
         this.aa001 = Aa001;
@@ -53,7 +55,7 @@ public class user {
     {
         return this.aa005;
     }
-    public void setAa005(float Aa006)
+    public void setAa006(float Aa006)
     {
         this.aa006 = Aa006;
     }
@@ -76,5 +78,17 @@ public class user {
     public String getAa008()
     {
         return this.aa008;
+    }
+    public void setAa009(String Aa009){
+        this.aa009 = Aa009;
+    }
+    public String getAa009(){
+        return this.aa009;
+    }
+    public void setAa010(String Aa010){
+        this.aa010 = Aa010;
+    }
+    public String getAa010(){
+        return this.aa010;
     }
 }

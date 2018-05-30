@@ -30,6 +30,7 @@ import com.henshin.stop_car.MainActivity;
 import com.henshin.stop_car.R;
 import com.henshin.stop_car.Tools.ArrayTools;
 import com.henshin.stop_car.Tools.BaseTools;
+import com.henshin.stop_car.user.user;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -54,24 +55,20 @@ public class LoginActivity extends AppCompatActivity {
     Button _loginButton;
     @BindView(R.id.link_signup)
     TextView _signupLink;
-    private String PicUri;
-    private String Uesrid;
-    private Bitmap bitmap;
+
     //用于自动登录的实现
     private SharedPreferences sp;
     private Handler handler = new Handler()
     {
         public void handleMessage(Message msg)
         {
-            String obj = (String)msg.obj;
-            PicUri = ArrayTools.StringToArray(obj)[2];
-            Uesrid = ArrayTools.StringToArray(obj)[1];
+            final String obj = (String)msg.obj;
             if(ArrayTools.StringToArray(obj)[0].equals("1"))
             {
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
-                                saveUserName();
+                                saveUserName(obj);
                                 onLoginSuccess();
                                progressDialog.dismiss();
                             }
@@ -173,7 +170,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    String reslut = response.body().string();
+                    byte[] responseBytes=response.body().bytes();
+                    String reslut = new String(responseBytes,"GBK");
                     Message message = new Message();
                     message.obj = reslut;
                     handler.sendMessage(message);
@@ -236,13 +234,12 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
     //保存PhoneNumber,用于自动登录
-    private void saveUserName(){
+    private void saveUserName(String result){
         SharedPreferences.Editor editor =sp.edit();
         //保存用户名
         editor.putString("username", username);
         editor.putString("password",password);
-        String returntoPic = getResources().getString(R.string.url)+PicUri.replace("\r\n","");
-        editor.putString("Uesrid",Uesrid);
+        editor.putString("result",result);
         editor.apply();
 
     }

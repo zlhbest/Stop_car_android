@@ -14,7 +14,7 @@ android {
         flatDir {
             dirs 'libs'   // aar目录
         }
-
+        maven { url "https://jitpack.io" }
     }
     buildTypes {
         release {
@@ -31,7 +31,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -41,7 +40,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile(name: 'arcgis-android-100.2.0', ext: 'aar')
+    implementation 'com.esri.arcgisruntime:arcgis-android:100.2.1'
     compile files('libs/tianditu2.0.jar')
     //侧滑栏
     compile('com.mikepenz:materialdrawer:6.0.2@aar') {
@@ -65,4 +64,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     //模糊查询库
     implementation 'br.com.mauker.materialsearchview:materialsearchview:1.2.2'
+    //封装好的弹窗
+    compile  'com.github.andyxialm:ColorDialog:1.0.0'
 }

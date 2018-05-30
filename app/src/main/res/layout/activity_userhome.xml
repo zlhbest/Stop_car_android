@@ -75,7 +75,7 @@
                         android:layout_marginRight="0dp"
                         android:background="@color/tran0"
                         android:onClick="dodo1"
-                        android:text="详细信息"
+                        android:text="个人订单"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp"/>
 
